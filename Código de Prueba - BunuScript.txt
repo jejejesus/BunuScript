@@ -1,0 +1,21 @@
+programa números {
+	imprimir ( ' esta es una hermosa cadena ' ) ;
+	A = 2 * 4 ;
+	b = 3 / 3 ;
+	a = A ;
+}
+
+programa condición {
+	B = 3 - 3 ;
+	a = ' prueba ' ;
+	d = B ;
+	B = 3 + 2 ;
+	si ( a > 3 ; ) {
+		por ( a = 3 ; a < 4 ; a = a + 1 ; ) {
+			si ( a > 1 ; ) {
+				imprimir ( ' a es mayor que uno ' ) ;
+			}
+		}
+		imprimir ( a ) ;
+	}
+}
