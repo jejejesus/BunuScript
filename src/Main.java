@@ -39,15 +39,33 @@ public class Main {
 
         // Imprimimos los tokens
         List<String> identificadores = new ArrayList<>();
-        System.out.println("\n       --= TABLA DE SIMBOLOS =--\n");
+        List<Token> errores = new ArrayList<>();
+
+        // Verificamos si hay erroes léxicos y si hay los imprimimos
+        for (Token token : tokens) {
+            if (token.getTipo() == Token.Tipos.ERROR)
+                errores.add(token);
+        }
+        if(!errores.isEmpty()) {
+            System.out.println();
+            for (Token token : errores) {
+                System.out.println(" ERROR LÉXICO EN: " + token.getValor() + " , EN LÍNEA: " + token.getLinea());
+            }
+            return;
+        }
+        // Realizamos el análisis sintáctico
+        Sintactico.Analisis(tokens, _codigo);
+
+        // Si no hay errores léxicos ni sintácticos imprimimos la tabla de símbolos
+        System.out.println("\n     --= TABLA DE SÍMBOLOS =--\n");
         for (Token token : tokens) {
             if(token.getTipo() == Token.Tipos.IDENTIFICADOR && !identificadores.contains(token.getValor()))
-            System.out.printf(" %17s: %-39s%n", token.getTipo(), token.getValor());
+                System.out.printf(" %12s: %-20s%n", token.getTipo(), token.getValor());
+                // System.out.printf(" %12s: %-20s, ASIGNACIÓN: %-20s%n", token.getTipo(), token.getValor(), token.getAsignacion());
             identificadores.add(token.getValor());
         }
         System.out.println();
 
-        // Realizamos el análisis sintáctico
-        Sintactico.Analisis(tokens, _codigo);
+
     }
 }

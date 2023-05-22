@@ -1,8 +1,10 @@
 programa números {
 	imprimir ( ' esta es una hermosa cadena ' ) ;
-	A = 2 * 4 ;
+	A = 2 + 4 ;
 	b = 3 / 3 ;
-	a = A ;
+	mientras ( a < 14 ; ) {
+	    a = a + 1 ;
+	}
 }
 
 programa condición {

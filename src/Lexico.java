@@ -272,10 +272,15 @@ class Token {
 
     public void setLinea(int linea) { this.linea = linea; }
 
+    public String getAsignacion() { return asignacion; }
+
+    public void setAsignacion() { this.asignacion = asignacion; }
+
     private Tipos tipo;
     private String valor;
     private int repe;
     private int linea;
+    private String asignacion;
 
     enum Tipos {
         DIGITO ("[0-9]"),
@@ -292,7 +297,7 @@ class Token {
         GUION_BAJO("[_]"),
         PALABRA_RESERVADA("programa|imprimir|si|sino|sino_entonces|por|mientras"),
         IDENTIFICADOR("[ ]"),
-        ERROR(127);
+        ERROR(124);
 
         public final String patron;
         Tipos(String s) {

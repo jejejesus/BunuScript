@@ -121,13 +121,8 @@ public class Sintactico {
                 }
             }
             if(error) {
-                if(tokenAnterior != null) {
-                    throw new RuntimeException(" ERROR SINTÁCTICO EN: " + tokenAnterior.getValor() +
-                            "\n EN LÍNEA: " + tokenAnterior.getLinea());
-                } else {
-                    throw new RuntimeException(" ERROR SINTÁCTICO EN: " + _tokens.get(0).getValor() +
-                            "\n EN LÍNEA: " + _tokens.get(0).getLinea());
-                }
+                    throw new RuntimeException("\n ERROR SINTÁCTICO EN: " + token.getValor() +
+                            "\n EN LÍNEA: " + token.getLinea());
             }
 
             tokenAnterior = token;
@@ -148,7 +143,7 @@ public class Sintactico {
         }
 
         if(!error) {
-            System.out.println(" COMPILADO SIN ERRORES :)");
+            System.out.println("\n COMPILADO SIN ERRORES :)");
         }
     }
 
@@ -551,7 +546,7 @@ public class Sintactico {
         //3 - SE CERRO EL PARENTESIS
         //4 - SE ABRIO LLAVE
         // SE ELIMINA CUANDO SE CIERRA LA LLAVE
-        if(!est_EnCadena && token.getValor().equals("while")) {
+        if(!est_EnCadena && token.getValor().equals("mientras")) {
             if(est_MientrasAbierto.isEmpty()) {
                 est_MientrasAbierto.add(0);
                 est_DentroMientras.add(true);
@@ -568,7 +563,7 @@ public class Sintactico {
             }
         } else {
             if(est_MientrasAbierto.get(est_MientrasAbierto.size()-1) == 4) {
-                if(token.getValor().equals("while") && !est_EnCadena) {
+                if(token.getValor().equals("mientras") && !est_EnCadena) {
                     error = sintaxisMientras(token, tokenAnterior, error);
                 }
                 else if(token.getTipo() == Token.Tipos.LLAVE_CERRAR) {
@@ -578,7 +573,7 @@ public class Sintactico {
                 else if(!est_DentroMientras.isEmpty()) {
                     error = sintaxisMientras(token, tokenAnterior, error);
                 }
-                else if(token.getValor().equals("for") && !est_EnCadena) {
+                else if(token.getValor().equals("por") && !est_EnCadena) {
                     error = sintaxisPor(token, tokenAnterior, error);
                 }
                 else if(!est_DentroPor.isEmpty()) {
@@ -592,7 +587,7 @@ public class Sintactico {
                 }
             }
             else if(est_MientrasAbierto.get(est_MientrasAbierto.size()-1) == 0) {
-                if(token.getTipo() == Token.Tipos.PARENTESIS_ABRIR && tokenAnterior.getValor().equals("while")) {
+                if(token.getTipo() == Token.Tipos.PARENTESIS_ABRIR && tokenAnterior.getValor().equals("mientras")) {
                     est_MientrasAbierto.set(est_MientrasAbierto.size()-1, 1);
                 } else {
                     return true;
